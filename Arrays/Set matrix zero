@@ -1,1 +1,61 @@
-
+class Solution {
+public:
+    void setZeroes(vector<vector<int>>& m) {
+        int n=m.size();
+        int mi=m[0].size();
+        // better solution
+        // vector<int> row(n,0);
+        // vector<int> col(mi,0);
+        // for(int i=0;i<n;i++){
+        //     for(int j=0;j<mi;j++){
+        //         if(m[i][j]==0){
+        //             row[i]=1;
+        //             col[j]=1;
+        //         }
+        //     }
+        // }
+        // for(int i=0;i<n;i++){
+        //     for(int j=0;j<mi;j++){
+        //         if(row[i]==1||col[j]==1){
+        //             m[i][j]=0;
+        //         }
+        //     }
+        // }    
+        //optimal solution
+        bool rowflag = false;
+        bool colflag = false;
+       for(int i = 0; i < n; i++){
+           if(m[i][0] == 0){
+                colflag = true;
+                break;
+        }
+        }
+        for(int j = 0; j < mi; j++){
+              if(m[0][j] == 0){
+                  rowflag = true;
+                  break;
+          }
+       }    
+        for(int i=1;i<n;i++){
+            for(int j=1;j<mi;j++){
+                if(m[i][j]==0){
+                    m[0][j]=0;
+                    m[i][0]=0;
+                }
+            }
+        }
+        for(int i=1;i<n;i++){
+            for(int j=1;j<mi;j++){
+                if((m[0][j]==0) || (m[i][0]==0)){
+                    m[i][j]=0;
+                }
+            }
+        }
+        if(rowflag){
+            for(int i=0;i<mi;i++) m[0][i]=0;
+        }
+        if(colflag){
+            for(int i=0;i<n;i++) m[i][0]=0;
+        }
+    }
+};
