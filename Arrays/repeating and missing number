@@ -1,1 +1,77 @@
+#include<bits/stdc++.h>
+using namespace std;
+vector<int> repeatingandmissing(vector<int> &a){
+    int n=a.size();
+    int sn=(n*(n+1))/2;
+    int s2n=(n*(n+1)*(2*n+1))/6;
+    int s=0,s2=0;
+    for(int i=0;i<n;i++){
+        s+=a[i];
+        s2+=a[i]*a[i];
+    }
+    int va1=s-sn;
+    int val2=(s2-s2n)/va1;
+    int x=(va1+val2)/2;
+    int y=x-va1;
+    return {x,y};
+}
+int main(){
+    vector<int> a;
+    string s;
+    getline(cin,s);
+    stringstream ss(s);
+    int x;
+    while(ss>> x) a.push_back(x);
+    vector<int> t=repeatingandmissing(a);
+    for(int i=0;i<t.size();i++){
+        cout<<t[i]<<" ";
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // o(n)
+    // vector<int> hash(a.size()+1,0);
+    // for(int i=0;i<a.size();i++){
+    //     hash[a[i]]++;
+    // }
+    // int repeating = -1, missing = -1; // Find the repeating and missing number: 
+    // for (int i = 1; i <= a.size(); i++) { 
+    //     if (hash[i] == 2) { 
+    //         repeating = i; 
+    //     } else if (hash[i] == 0) { 
+    //         missing = i;
+    //      } /* If both repeating and missing are found, break out of loop*/ 
+    //      if (repeating != -1 && missing != -1) { break; }
+    // }
+    //0(nlogn)
+    // map<int,int> mp;
+    // for(int i=0;i<a.size();i++){
+    //     mp[a[i]]++;
+    // }
+    // int repeat=-1,miss=-1;
+    // for(int i=1;i<=a.size();i++){
+    //     if(mp[i]==2) repeat=i;
+    //     if(mp[i]==0) miss=i;
+        
+
+    // }
+    // return {repeating,missing};
+
+    
+
+
+
 
