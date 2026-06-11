@@ -1,0 +1,78 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        ListNode* temp=headA;
+        ListNode* temp1=headB;
+        // map<ListNode*,int> mp;
+        // while(temp!=nullptr){
+        //     mp[temp]++;
+        //     temp=temp->next;
+        // }
+        // while(temp1!=nullptr){
+        //     if(mp.find(temp1)!=mp.end()){
+        //         return temp1;
+        //     }
+        //     temp1=temp1->next;
+        // }
+        // return nullptr;
+        // int n1=0,n2=0;
+        // while(temp!=nullptr){
+        //     n1++;
+        //     temp=temp->next;
+        // }
+        //   while(temp1!=nullptr){
+        //     n2++;
+        //     temp1=temp1->next;
+        // }
+        // ListNode* t1=headA;
+        // ListNode* t2=headB;
+        // if(n1>n2){
+        //     int d=n1-n2;
+        //     while(d--){
+        //         t1=t1->next;
+        //     }
+        // }else if(n2>n1){
+        //     int d=n2-n1;
+        //     while(d--){
+        //         t2=t2->next;
+        //     }
+        // }
+        // while(t1!=nullptr && t2!=nullptr){
+        //     if(t1==t2) return t1;
+        //     t1=t1->next;
+        //     t2=t2->next;
+        // }
+        // return nullptr;
+      
+        
+        if(headA == NULL || headB == NULL) 
+            return NULL;
+
+
+        while(temp != temp1) {
+
+            if(temp == NULL)
+                temp = headB;
+            else
+                temp = temp->next;
+
+            if(temp1 == NULL)
+                temp1 = headA;
+            else
+                temp1 = temp1->next;
+        }
+
+        return temp;   // either intersection node or NULL
+  
+
+    }
+    
+};
