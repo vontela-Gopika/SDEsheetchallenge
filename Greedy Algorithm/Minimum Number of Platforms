@@ -1,0 +1,21 @@
+int minPlatforms(vector<int>& arr, vector<int>& dept) {
+
+    vector<pair<int, int>> train;
+
+    for (int i = 0; i < arr.size(); i++) {
+        train.push_back({arr[i], 0});  // 0 = arrival
+        train.push_back({dept[i], 1}); // 1 = departure
+    }
+
+    sort(train.begin(), train.end());
+
+    int cnt = 0, maxCnt = INT_MIN;
+
+    for (int i = 0; i < train.size(); i++) {
+        maxCnt = max(maxCnt, cnt);
+        if (train[i].second == 0) cnt++;
+        else cnt--;
+    }
+
+    return maxCnt;
+}
