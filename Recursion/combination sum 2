@@ -1,0 +1,24 @@
+class Solution {
+public:
+vector<vector<int>> ans;
+    void find(vector<int>& c,vector<int>& ds,int target,int idx,int n){
+        if(target==0){
+            ans.push_back(ds);
+            return;
+        }
+        for(int i=idx;i<n;i++){
+            if(i>idx && c[i]==c[i-1]) continue;
+            if(c[i]>target) break;
+            ds.push_back(c[i]);
+            find(c,ds,target-c[i],i+1,n);
+            ds.pop_back();
+        }
+    }
+    vector<vector<int>> combinationSum2(vector<int>& c, int target) {
+        vector<int> ds;
+        int n=c.size();
+        sort(c.begin(),c.end());
+        find(c,ds,target,0,n);
+        return ans;
+    }
+};
