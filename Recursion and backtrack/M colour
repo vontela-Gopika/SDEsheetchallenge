@@ -1,0 +1,58 @@
+class Solution {
+public:
+
+    bool possible(int node, int col,
+                  vector<int>& color,
+                  vector<vector<int>>& adj,
+                  int v) {
+
+        for (int k = 0; k < v; k++) {
+            if (adj[node][k] == 1 && color[k] == col)
+                return false;
+        }
+
+        return true;
+    }
+
+    bool solve(int node,
+               vector<int>& color,
+               vector<vector<int>>& adj,
+               int m,
+               int v) {
+
+        if (node == v)
+            return true;
+
+        for (int col = 1; col <= m; col++) {
+
+            if (possible(node, col, color, adj, v)) {
+
+                color[node] = col;
+
+                if (solve(node + 1, color, adj, m, v))
+                    return true;
+
+                color[node] = 0;
+            }
+        }
+
+        return false;
+    }
+
+    bool graphColoring(int v, vector<vector<int>> &edges, int m) {
+
+        vector<vector<int>> adj(v, vector<int>(v, 0));
+
+        for (auto &e : edges) {
+            int u = e[0];
+            int w = e[1];
+
+            adj[u][w] = 1;
+            adj[w][u] = 1;
+        }
+
+        vector<int> color(v, 0);
+
+        return solve(0, color, adj, m, v);
+    }
+};
