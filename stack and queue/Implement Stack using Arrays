@@ -1,0 +1,60 @@
+#include<bits/stdc++.h>
+using namespace std;
+class implementation{
+    int topIndex = -1;
+    int a[10];
+public:
+    void push(int x){
+        if(topIndex == 9){
+            cout<<"Stack Overflow"<<endl;
+        }
+        else{
+            topIndex++;
+            a[topIndex] = x;
+        }
+    }
+
+    void pop(){
+        if(topIndex == -1){
+            cout<<"Stack Underflow"<<endl;
+        }
+        else{
+            topIndex--;
+        }
+    }
+
+    void top(){
+        if(topIndex == -1){
+            cout<<"Stack is Empty"<<endl;
+        }
+        else{
+            cout<<a[topIndex]<<endl;
+        }
+    }
+
+    void size(){
+        cout<<topIndex + 1 << endl;
+    }
+};
+int main(){
+    implementation s;
+    int n;
+    cin>>n;
+    while(n--){
+        string op;
+        cin>>op;
+        if(op=="push"){
+            int x;
+            cin>>x;
+            s.push(x);
+        }
+        else if(op=="pop"){
+            s.pop();
+        }
+        else if(op=="top"){
+            s.top();
+        }else if(op=="size"){
+            s.size();
+        }
+    }
+}
