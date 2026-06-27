@@ -1,0 +1,63 @@
+class Solution {
+public:
+    // vector<int> pse(vector<int>& heights){
+    //     stack<int> st;
+    //     vector<int> p(heights.size());
+    //     for(int i=0;i<heights.size();i++){
+    //         while(!st.empty()&& heights[st.top()]>heights[i]) st.pop();
+            
+    //         p[i]=st.empty()?-1:st.top();
+    //         st.push(i);
+    //     }
+    //     return p;
+    // }
+    // vector<int> nse(vector<int>& heights){
+    //     stack<int> st;
+    //     vector<int> p(heights.size());
+    //     for(int i=heights.size()-1;i>=0;i--){
+    //         while(!st.empty()&& heights[st.top()]>=heights[i]) st.pop();
+            
+    //         p[i]=st.empty()?heights.size():st.top();
+    //         st.push(i);
+    //     }
+    //     return p;
+    // }
+    // int largestRectangleArea(vector<int>& heights) {
+    //     int maxi=INT_MIN;
+    //     vector<int> p=pse(heights);
+    //     vector<int> n=nse(heights);
+    //     for(int i=0;i<heights.size();i++){
+    //         int width=n[i]-p[i]-1;
+    //         int h=heights[i];
+    //         maxi=max(width*h,maxi);
+    //     }
+    //     return maxi;
+    // }
+    int largestRectangleArea(vector<int>& heights){
+        stack<int> st;
+        //storing idx in stack
+        int n=heights.size();
+        int maxarea=0;
+        for(int i=0;i<n;i++){
+            while(!st.empty()&&heights[st.top()]>heights[i]){
+                
+                int nse=i;
+                int e=heights[st.top()];
+                st.pop();
+                int pse=st.empty()?-1:st.top();
+                maxarea=max(e*(nse-pse-1),maxarea);
+                
+            }
+            st.push(i);
+        }
+        while(!st.empty()){
+            int nse=n;
+            
+            int e=heights[st.top()];
+            st.pop();
+            int pse=st.empty()?-1:st.top();
+            maxarea=max(maxarea,e*(nse-pse-1));
+        }
+        return maxarea;
+    }
+};
